@@ -1,7 +1,7 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  const factory = await ethers.getContractFactory("Counter");
+  const factory = await ethers.getContractFactory("Faucet");
 
   // If we had constructor arguments, they would be passed into deploy()
   let contract = await factory.deploy();
