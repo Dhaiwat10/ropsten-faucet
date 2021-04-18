@@ -12,19 +12,6 @@ function Home(): React.ReactNode {
   const [success, setSuccess] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (value) {
-      setTouched(true);
-    }
-
-    setIsValid(verifyEthAddress(value));
-  }, [value]);
-
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    await requestFunds();
-  };
-
   const getContractBalance = async () => {
     try {
       const { data } = await axios.get('/api');
@@ -47,6 +34,30 @@ function Home(): React.ReactNode {
     }
     setLoading(false);
   };
+
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!isValid) {
+      return setError('Invalid wallet address.');
+    }
+
+    await requestFunds();
+  };
+
+  useEffect(() => {
+    if (value) {
+      setTouched(true);
+    }
+
+    setIsValid(verifyEthAddress(value));
+  }, [value]);
+
+  useEffect(() => {
+    if (!isValid) {
+      setError('');
+    }
+  }, [value]);
 
   useEffect(() => {
     getContractBalance();
