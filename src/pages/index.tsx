@@ -1,20 +1,16 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { Button, Container, Form, Input } from 'semantic-ui-react';
+import { Button, Container, Form, Input, Message } from 'semantic-ui-react';
 import { verifyEthAddress } from '../util';
-import Faucet from '../artifacts/contracts/Faucet.sol/Faucet.json';
-import { ethers } from 'ethers';
+import axios from 'axios';
 
-declare const window: any;
-
-type Props = {
-  contractAddress: string;
-};
-
-function Home({ contractAddress }: Props): React.ReactNode {
+function Home(): React.ReactNode {
   const [value, setValue] = useState('');
   const [touched, setTouched] = useState(false);
   const [isValid, setIsValid] = useState<boolean>(false);
   const [contractBalance, setContractBalance] = useState<string>();
+  const [error, setError] = useState<string>('');
+  const [success, setSuccess] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (value) {
@@ -30,64 +26,64 @@ function Home({ contractAddress }: Props): React.ReactNode {
   };
 
   const getContractBalance = async () => {
-    if (typeof window.ethereum !== 'undefined') {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const contractBalance = await provider.getBalance(contractAddress);
-      return contractBalance.toString();
+    try {
+      const { data } = await axios.get('/api');
+      const { balance } = data;
+      setContractBalance(balance);
+    } catch (e) {
+      console.log(e);
+      setContractBalance('');
     }
   };
 
   const requestFunds = async () => {
-    if (typeof window.ethereum !== 'undefined') {
-      await window.ethereum.request({
-        method: 'eth_requestAccounts',
-      });
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
-      const contract = new ethers.Contract(contractAddress, Faucet.abi, signer);
-      try {
-        await contract.withdraw(value);
-        console.log('Successfully withdrawed funds');
-      } catch (err) {
-        console.log('Error: ', err);
-      }
+    setLoading(true);
+    try {
+      await axios.post('/api', { address: value });
+      setSuccess(true);
+    } catch (e) {
+      console.log(e);
+      setError(e.message);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
-    if (window.ethereum !== undefined) {
-      getContractBalance().then((bal) => setContractBalance(bal));
-    }
+    getContractBalance();
   }, []);
 
   return (
     <Container>
-      <Form onSubmit={onSubmit}>
+      <Form success={success} error={!!error} onSubmit={onSubmit}>
         <h1>Ropsten Faucet</h1>
         <Form.Field error={touched && !isValid}>
           <label>Your Ropsten wallet address</label>
           <Input
+            disabled={loading}
             type="text"
             value={value}
             onChange={(e) => setValue(e.target.value)}
           />
         </Form.Field>
-        <Button primary>Request Ether</Button>
+        <Message error content={error} />
+        {success && (
+          <Message
+            success
+            content="0.1 ether will soon be transferred to your wallet."
+          />
+        )}
+        <Button loading={loading} primary>
+          Request Ether
+        </Button>
       </Form>
-      <span>
-        Contract balance - {parseInt(contractBalance || '') / Math.pow(10, 18)}{' '}
-        ether
-      </span>
+      {contractBalance ? (
+        <span>
+          Contract balance: {parseInt(contractBalance || '') / Math.pow(10, 18)}{' '}
+          ether
+        </span>
+      ) : null}
     </Container>
   );
-}
-
-export async function getStaticProps() {
-  return {
-    props: {
-      contractAddress: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
-    },
-  };
 }
 
 export default Home;

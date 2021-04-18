@@ -5,6 +5,6 @@ typechain/
 artifacts/
 coverage*
 .env
-.next
-.github
-.vscode
+.next/
+.github/
+.vscode/
