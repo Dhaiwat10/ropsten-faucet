@@ -5,6 +5,6 @@ node_modules/
 cache/
 build/
 typechain/
-artifacts/
+# artifacts/
 coverage*
 .env
