@@ -83,7 +83,12 @@ function Home(): React.ReactNode {
 
   return (
     <Container style={{ height: '100vh' }}>
-      <Form style={{ marginTop: 100 }} success={success} error={!!error} onSubmit={onSubmit}>
+      <Form
+        style={{ marginTop: 100 }}
+        success={success}
+        error={!!error}
+        onSubmit={onSubmit}
+      >
         <h1>Ropsten Faucet</h1>
         <Form.Field error={touched && !isValid}>
           <label>Your Ropsten wallet address</label>
@@ -101,16 +106,20 @@ function Home(): React.ReactNode {
             content="0.1 ether will soon be transferred to your wallet."
           />
         )}
-        <Button style={{ marginBottom: 10 }} loading={loading} primary>
+        <Button style={{ marginBottom: 25 }} loading={loading} primary>
           Request Ether
         </Button>
       </Form>
+      <p>
+        Please send donations/unused test ether to{' '}
+        {process.env.NEXT_PUBLIC_CONTRACT_ADDRESS} to keep this faucet running.
+      </p>
       {contractBalance ? (
-        <span>
+        <p>
           Contract balance:{' '}
           {(parseInt(contractBalance || '') / Math.pow(10, 18), 2).toFixed(2)}{' '}
           ether
-        </span>
+        </p>
       ) : null}
     </Container>
   );
