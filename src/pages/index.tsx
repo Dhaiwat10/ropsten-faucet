@@ -1,5 +1,16 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { Button, Container, Form, Input, Message } from 'semantic-ui-react';
+import {
+  Button,
+  Container,
+  Divider,
+  Form,
+  Icon,
+  Image,
+  Input,
+  List,
+  Message,
+  Placeholder,
+} from 'semantic-ui-react';
 import { verifyEthAddress } from '../util';
 import axios from 'axios';
 import { createRecord, validateRequest } from '../lib/db';
@@ -17,7 +28,10 @@ function Home(): React.ReactNode {
     try {
       const { data } = await axios.get('/api');
       const { balance } = data;
-      setContractBalance(balance);
+      const formattedBalance = (parseInt(balance) / Math.pow(10, 18)).toFixed(
+        2
+      );
+      setContractBalance(formattedBalance);
     } catch (e) {
       console.log(e);
       setContractBalance('');
@@ -82,7 +96,7 @@ function Home(): React.ReactNode {
   }, []);
 
   return (
-    <Container style={{ height: '100vh' }}>
+    <Container>
       <Form
         style={{ marginTop: 100 }}
         success={success}
@@ -103,24 +117,30 @@ function Home(): React.ReactNode {
         {success && (
           <Message
             success
-            content="0.1 ether will soon be transferred to your wallet."
+            content="0.1 test ether will soon be transferred to your wallet."
           />
         )}
-        <Button style={{ marginBottom: 25 }} loading={loading} primary>
+        <Button style={{ marginBottom: 50 }} loading={loading} primary>
           Request Ether
         </Button>
       </Form>
       <p>
-        Please send donations/unused test ether to{' '}
+        Please send any unused test ether to{' '}
         {process.env.NEXT_PUBLIC_CONTRACT_ADDRESS} to keep this faucet running.
       </p>
+      <h5>
+        Developed &amp; maintained by{' '}
+        <a href="https://dhaiwatpandya.com" target="_blank">
+          Dhaiwat Pandya.
+        </a>
+      </h5>
       {contractBalance ? (
-        <p>
-          Contract balance:{' '}
-          {(parseInt(contractBalance || '') / Math.pow(10, 18), 2).toFixed(2)}{' '}
-          ether
-        </p>
-      ) : null}
+        <p>Contract balance: {contractBalance} ether.</p>
+      ) : (
+        <Placeholder>
+          <Placeholder.Line></Placeholder.Line>
+        </Placeholder>
+      )}
     </Container>
   );
 }
