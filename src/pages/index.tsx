@@ -2,12 +2,8 @@ import { FormEvent, useEffect, useState } from 'react';
 import {
   Button,
   Container,
-  Divider,
   Form,
-  Icon,
-  Image,
   Input,
-  List,
   Message,
   Placeholder,
 } from 'semantic-ui-react';
