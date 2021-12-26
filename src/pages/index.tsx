@@ -60,7 +60,7 @@ function Home(): React.ReactNode {
       }
 
       setSuccess(true);
-    } catch (e) {
+    } catch (e: any) {
       console.log(e);
       setError(e.message);
     }
