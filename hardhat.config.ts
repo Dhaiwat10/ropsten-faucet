@@ -3,10 +3,25 @@ import { HardhatUserConfig } from "hardhat/types";
 import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
 import "@nomiclabs/hardhat-etherscan";
+import { task } from "hardhat/config";
+import { Wallet } from "ethers";
 
 const accounts = {
   mnemonic: process.env.MNEMONIC || "",
 };
+
+task("accounts", "Prints the list of accounts", async (_args, hre) => {
+  const accounts = await hre.ethers.getSigners();
+
+  for (const account of accounts) {
+    console.log(account.address);
+  }
+});
+
+task("caller-secret", "Prints the list of accounts", async (_args, hre) => {
+  const wallet = Wallet.fromMnemonic(accounts.mnemonic);
+  console.log(wallet.privateKey);
+});
 
 const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
