@@ -1,5 +1,5 @@
-# Ropsten Faucet
-An ether faucet running on the Ropsten test network. Written with Hardhat, Solidity, TypeScript, React, NextJS.
+# Polygon Faucet
+A $MATIC faucet running on the Polygon network. Written with Hardhat, Solidity, TypeScript, React, NextJS.
 <hr>
-<a href="https://ropsten-faucet.dhaiwatpandya.com">Click here to use the faucet</a><br>
-<a href="https://ropsten.etherscan.io/address/0x315cbA97683DA001462582979C14bd3552A7D244">Etherscan</a>
+<a href="https://polygon-faucet.m00n.city">Click here to use the faucet</a><br>
+<a href="https://polygonscan.com/address/0x315cbA97683DA001462582979C14bd3552A7D244">Smart contract</a>

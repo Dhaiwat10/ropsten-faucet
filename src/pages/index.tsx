@@ -99,9 +99,9 @@ function Home(): React.ReactNode {
         error={!!error}
         onSubmit={onSubmit}
       >
-        <h1>Ropsten Faucet</h1>
+        <h1>Polygon Faucet</h1>
         <Form.Field error={touched && !isValid}>
-          <label>Your Ropsten wallet address</label>
+          <label>Your Polygon wallet address</label>
           <Input
             disabled={loading}
             type="text"
@@ -122,12 +122,12 @@ function Home(): React.ReactNode {
       </Form>
       <p>
         Please send any unused test ether to{' '}
-        {process.env.NEXT_PUBLIC_CONTRACT_ADDRESS} to keep this faucet running.
+        {process.env.PUBLIC_CONTRACT_ADDRESS} to keep this faucet running.
       </p>
       <h5>
         Developed &amp; maintained by{' '}
-        <a href="https://dhaiwatpandya.com" target="_blank">
-          Dhaiwat Pandya.
+        <a href="https://polygon-faucet.m00n.city" target="_blank">
+          M00N City devs
         </a>
       </h5>
       {contractBalance ? (

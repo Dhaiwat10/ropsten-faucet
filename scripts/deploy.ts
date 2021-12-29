@@ -4,7 +4,7 @@ async function main() {
   const factory = await ethers.getContractFactory("Faucet");
 
   // If we had constructor arguments, they would be passed into deploy()
-  let contract = await factory.deploy();
+  const contract = await factory.deploy();
 
   // The address the Contract WILL have once mined
   console.log(contract.address);
