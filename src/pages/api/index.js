@@ -1,6 +1,6 @@
-import Faucet from '../../artifacts/contracts/Faucet.sol/Faucet.json';
-import { ethers } from 'ethers';
-import { verifyEthAddress } from '../../util';
+import Faucet from "../../../artifacts/contracts/Faucet.sol/Faucet.json";
+import { ethers } from "ethers";
+import { verifyEthAddress } from "../../util";
 
 const CALLER_SECRET = process.env.CALLER_SECRET;
 const CONTRACT_ADDRESS = process.env.PUBLIC_CONTRACT_ADDRESS;
