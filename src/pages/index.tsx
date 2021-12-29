@@ -113,15 +113,15 @@ function Home(): React.ReactNode {
         {success && (
           <Message
             success
-            content="0.1 test ether will soon be transferred to your wallet."
+            content="0.005 $MATIC will soon be transferred to your wallet."
           />
         )}
         <Button style={{ marginBottom: 50 }} loading={loading} primary>
-          Request Ether
+          Request $MATIC
         </Button>
       </Form>
       <p>
-        Please send any unused test ether to{' '}
+        Please send any unused $MATIC to{' '}
         {process.env.PUBLIC_CONTRACT_ADDRESS} to keep this faucet running.
       </p>
       <h5>
@@ -131,7 +131,7 @@ function Home(): React.ReactNode {
         </a>
       </h5>
       {contractBalance ? (
-        <p>Contract balance: {contractBalance} ether.</p>
+        <p>Contract balance: {contractBalance} $MATIC.</p>
       ) : (
         <Placeholder>
           <Placeholder.Line></Placeholder.Line>
