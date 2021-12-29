@@ -34,13 +34,13 @@ const config: HardhatUserConfig = {
     localhost: {
       accounts,
     },
-    matic: {
-      url: `https://rpc-mainnet.maticvigil.com/v1/${process.env.MATICVIGIL_API_KEY}`,
+    polygon: {
+      url: process.env.RPC_URL,
       accounts,
       chainId: 137,
     },
-    "matic-mumbai": {
-      url: `https://rpc-mumbai.maticvigil.com/v1/${process.env.MATICVIGIL_API_KEY}`,
+    "polygon-mumbai": {
+      url: process.env.RPC_TESTNET_URL,
       accounts,
       chainId: 80001,
     },
