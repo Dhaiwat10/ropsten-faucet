@@ -1,5 +1,5 @@
-import firebase from 'firebase/app';
-import 'firebase/firebase-database';
+import { initializeApp, getApp } from "firebase/app";
+import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -11,9 +11,10 @@ const firebaseConfig = {
   measurementId: process.env.FIREBASE_MEASUREMENT_ID,
 };
 
-if (typeof window !== 'undefined' && !firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-  firebase.database();
+export function initFirebaseApp() {
+  try {
+    initializeApp(firebaseConfig);
+  } catch (error) {
+    console.log(error);
+  }
 }
-
-export { firebase };

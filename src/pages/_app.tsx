@@ -3,6 +3,9 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import 'semantic-ui-css/semantic.min.css';
 import '../styles/global.css';
+import { initFirebaseApp } from '../lib/firebase';
+
+initFirebaseApp();
 
 function MyApp({ Component, pageProps }: AppProps): React.ReactNode {
   return (
