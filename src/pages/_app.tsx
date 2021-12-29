@@ -11,24 +11,8 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactNode {
   return (
     <>
       <Head>
-        <title>Ropsten Faucet</title>
-        <link rel="icon" type="image/png" href="eth32.png"></link>
-        {/* Global site tag (gtag.js) - Google Analytics  */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-ENWJRZPE6L"
-        ></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-          
-            gtag('config', 'G-ENWJRZPE6L');
-        `,
-          }}
-        />
+        <title>Polygon Faucet - M00N City</title>
+        <link rel="icon" type="image/png" href="favicon.ico"></link>
       </Head>
       <Component {...pageProps} />
     </>
