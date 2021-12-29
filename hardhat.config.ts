@@ -23,9 +23,6 @@ const config: HardhatUserConfig = {
       },
     ],
   },
-  paths: {
-    artifacts: "./src/artifacts",
-  },
   networks: {
     hardhat: {
       accounts,

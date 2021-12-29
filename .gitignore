@@ -4,7 +4,7 @@
 node_modules/
 cache/
 build/
-typechain/
-# artifacts/
+typechain-types/
+artifacts/
 coverage*
 .env
