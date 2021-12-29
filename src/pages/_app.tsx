@@ -1,7 +1,7 @@
 import React from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import 'semantic-ui-css/semantic.min.css';
+import 'fomantic-ui-css/semantic.min.css';
 import '../styles/global.css';
 import { initFirebaseApp } from '../lib/firebase';
 
